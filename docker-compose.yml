@@ -1,0 +1,15 @@
+services:
+  spur:
+    image: ghcr.io/stockyard-dev/stockyard-spur:latest
+    ports:
+      - "8950:8950"
+    environment:
+      - PORT=${STOCKYARD_PORT:-8950}
+      - DATA_DIR=${STOCKYARD_DATA_DIR:-/data}
+      - SPUR_LICENSE_KEY=${STOCKYARD_SPUR_LICENSE_KEY:-}
+    volumes:
+      - spur-data:/data
+    restart: unless-stopped
+volumes:
+  spur-data:
+    driver: local
